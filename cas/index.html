@@ -8,88 +8,74 @@
 <style>
   :root{
     --brand:#111; --accent:#FFCC00; --bg:#fff;
-    --wm-size: 500px;   /* slimmer watermark */
+    --wm-size: 320px;  /* watermark size */
     --wm-gap: 4px;
   }
 
   *{box-sizing:border-box}
   html,body{margin:0;background:var(--bg);color:var(--brand);font-family:Arial,Helvetica,sans-serif;-webkit-text-size-adjust:100%}
 
-  /* Watermark in normal flow */
   .watermark{
-    display:block;width:var(--wm-size);height:auto;margin:var(--wm-gap) auto 4px;pointer-events:none;
+    display:block;width:var(--wm-size);height:auto;margin:var(--wm-gap) auto 2px;pointer-events:none;
   }
 
-  /* NARROW + TIGHT VERTICAL RHYTHM */
   .wrap{
-    max-width: 420px;               /* narrow column */
+    max-width: 420px;
     margin: 0 auto;
-    padding: 10px 12px 18px;        /* tighter top/bottom */
-    display: flex; flex-direction: column; align-items: center; text-align: center;
-    gap: 6px;                       /* compact default gap */
+    padding: 8px 10px 14px;             /* tighter top/bottom */
+    display:flex;flex-direction:column;align-items:center;text-align:center;gap:4px;
   }
 
-  .brand{
-    margin: 2px 0 2px;              /* very tight */
-    font-size: 32px; font-weight: 800; letter-spacing:.2px;
-  }
+  .brand{margin:0;font-size:32px;font-weight:800;letter-spacing:.2px}
 
   .amount-line{
-    display:inline-flex; align-items:baseline; justify-content:center;
-    gap:6px;                         /* tighter */
-    margin:2px 0;                    /* tighter */
+    display:inline-flex;align-items:baseline;justify-content:center;gap:4px;margin:0;
   }
 
-  /* Big number, but compact vertical box */
   #amount{
-    width:auto; min-width:6ch; text-align:center;
-    font-size:86px; line-height:0.9; /* <— tighter line-height */
-    font-weight:900; color:var(--accent);
-    border:none; border-bottom:4px solid transparent; outline:none;
-    background:transparent !important; -webkit-appearance:none; appearance:none; box-shadow:none; border-radius:0;
+    width:auto;min-width:6ch;text-align:center;
+    font-size:86px;line-height:.85;     /* tighter box */
+    font-weight:900;color:var(--accent);
+    border:none;border-bottom:4px solid transparent;outline:none;
+    background:transparent !important;-webkit-appearance:none;appearance:none;box-shadow:none;border-radius:0;
     font-variant-numeric:tabular-nums;
   }
   #amount:focus{border-bottom-color:#e6e6e6}
 
-  .currency{
-    font-size:44px;                  /* slightly smaller */
-    line-height:0.9;                 /* tighter box */
-    font-weight:900; color:var(--accent);
-  }
+  .currency{font-size:42px;line-height:.85;font-weight:900;color:var(--accent)}
 
-  .instruction{
-    margin:4px 0 8px;                /* much tighter */
-    font-weight:500; letter-spacing:.4px; font-size:16.5px;
-  }
+  .instruction{margin:2px 0 6px;font-weight:500;letter-spacing:.35px;font-size:16px}
 
   .food{
-    width:100%; max-width:380px;     /* narrower image */
-    height:auto; display:block; margin:4px auto 8px; /* tighter */
+    width:100%;max-width:360px;        /* slimmer image */
+    height:auto;display:block;margin:2px auto 6px;
   }
 
+  /* Narrower yellow button */
   .cta{
-    background:var(--accent); border:none; border-radius:999px;
-    padding:10px 18px;               /* tighter button */
-    font-weight:900; font-size:19px; cursor:pointer;
-    margin:6px 0 8px; width:min(380px,94%);
-    color:#111 !important; text-decoration:none !important;
+    background:var(--accent);border:none;border-radius:999px;
+    padding:8px 14px;font-weight:900;font-size:18.5px;cursor:pointer;
+    margin:4px 0 6px;
+    width: min(230px, 76%);            /* tighter width */
+    color:#111 !important;text-decoration:none !important;
   }
   button.cta{-webkit-appearance:none;appearance:none}
   .cta:link,.cta:visited,.cta:hover,.cta:active{color:#111 !important;text-decoration:none !important}
 
+  /* Bold (“fat”) fine print, tighter lines */
   .fineprint{
-    margin-top:2px; font-size:12.5px; line-height:1.25; max-width:420px;
+    margin-top:0;font-size:12.5px;line-height:1.2;max-width:420px;font-weight:800;
   }
 
   @media (max-width:480px){
     :root{--wm-size:120px;--wm-gap:6px}
     .brand{font-size:26px}
-    #amount{font-size:62px; min-width:5ch}
+    #amount{font-size:62px;min-width:5ch;line-height:.85}
     .currency{font-size:34px}
-    .instruction{font-size:15px; margin:4px 0 8px}
-    .food{max-width:92%; margin:4px auto 8px}
-    .cta{width:92%; font-size:18px; padding:10px 16px}
-    .fineprint{font-size:12px}
+    .instruction{font-size:14.5px;margin:2px 0 6px}
+    .food{max-width:92%;margin:2px auto 6px}
+    .cta{width:74%;font-size:17.5px;padding:8px 12px}
+    .fineprint{font-size:12px;line-height:1.18}
   }
 </style>
 </head>
