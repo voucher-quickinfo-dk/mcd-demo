@@ -3,138 +3,97 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<!-- Stop iOS from auto-linking stuff (turning text blue) -->
 <meta name="format-detection" content="telephone=no,address=no,email=no,url=no,date=no">
 <title>Startside – Rabatkort</title>
 <style>
-  :root {
-    --brand:#111111;
-    --accent:#FFCC00;
-    --bg:#ffffff;
-
-    /* watermark sizing + spacing */
-    --wm-size: 300px;   /* was 250px — a little larger now */
-    --wm-gap: -10px;    /* distance from very top */
+  :root{
+    --brand:#111; --accent:#FFCC00; --bg:#fff;
+    --wm-size: 500px;   /* slimmer watermark */
+    --wm-gap: 4px;
   }
 
-  * { box-sizing: border-box; }
-  html, body {
-    margin: 0;
-    background: var(--bg);
-    color: var(--brand);
-    font-family: Arial, Helvetica, sans-serif;
-    -webkit-text-size-adjust: 100%;
-  }
+  *{box-sizing:border-box}
+  html,body{margin:0;background:var(--bg);color:var(--brand);font-family:Arial,Helvetica,sans-serif;-webkit-text-size-adjust:100%}
 
-  /* Top watermark overlay (fixed) */
+  /* Watermark in normal flow */
   .watermark{
-    position: fixed;
-    z-index: 9999;
-    top: var(--wm-gap);
-    left: 50%;
-    transform: translateX(-50%);
-    width: var(--wm-size);
-    height: auto;
-    pointer-events: none; /* don’t block clicks */
+    display:block;width:var(--wm-size);height:auto;margin:var(--wm-gap) auto 4px;pointer-events:none;
   }
 
-  /* Add top padding so content clears the fixed GIF */
-  .wrap {
-    max-width: 760px;
+  /* NARROW + TIGHT VERTICAL RHYTHM */
+  .wrap{
+    max-width: 420px;               /* narrow column */
     margin: 0 auto;
-    padding: calc(var(--wm-size) + var(--wm-gap) + 16px) 16px 40px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
+    padding: 10px 12px 18px;        /* tighter top/bottom */
+    display: flex; flex-direction: column; align-items: center; text-align: center;
+    gap: 6px;                       /* compact default gap */
   }
 
-  .brand { margin: 32px 0 10px; font-size: 36px; font-weight: 800; letter-spacing: .2px; }
-
-  .amount-line {
-    display: inline-flex;
-    align-items: baseline;
-    justify-content: center;
-    gap: 10px;
-    margin: 8px 0;
+  .brand{
+    margin: 2px 0 2px;              /* very tight */
+    font-size: 32px; font-weight: 800; letter-spacing:.2px;
   }
 
-  /* bigger, always-transparent input with a minimum width */
+  .amount-line{
+    display:inline-flex; align-items:baseline; justify-content:center;
+    gap:6px;                         /* tighter */
+    margin:2px 0;                    /* tighter */
+  }
+
+  /* Big number, but compact vertical box */
   #amount{
-    width: auto;
-    min-width: 6ch;                 /* ensures space for the digits */
-    text-align: center;
-    font-size: 86px;
-    line-height: 1;
-    font-weight: 900;
-    color: var(--accent);
-    border: none;
-    border-bottom: 4px solid transparent;
-    outline: none;
-
-    /* kill iOS Quick Look white background */
-    background: transparent !important;
-    background-color: transparent !important;
-    -webkit-appearance: none;
-    appearance: none;
-    box-shadow: none;
-    border-radius: 0;
-
-    font-variant-numeric: tabular-nums;
+    width:auto; min-width:6ch; text-align:center;
+    font-size:86px; line-height:0.9; /* <— tighter line-height */
+    font-weight:900; color:var(--accent);
+    border:none; border-bottom:4px solid transparent; outline:none;
+    background:transparent !important; -webkit-appearance:none; appearance:none; box-shadow:none; border-radius:0;
+    font-variant-numeric:tabular-nums;
   }
-  #amount:focus { border-bottom-color: #e6e6e6; }
+  #amount:focus{border-bottom-color:#e6e6e6}
 
-  .currency { font-size: 52px; font-weight: 900; color: var(--accent); line-height: 1; }
-
-  .instruction {
-    margin: 12px 0 26px;
-    font-weight: 500;
-    letter-spacing: 1px;
-    font-size: 18px;
+  .currency{
+    font-size:44px;                  /* slightly smaller */
+    line-height:0.9;                 /* tighter box */
+    font-weight:900; color:var(--accent);
   }
 
-  .food { width: 100%; max-width: 640px; height: auto; display: block; margin: 0 auto 18px; }
-
-  .cta {
-    background: var(--accent);
-    border: none;
-    padding: 18px 28px;
-    border-radius: 999px;
-    font-weight: 900;
-    font-size: 22px;
-    cursor: pointer;
-    margin: 14px 0 18px;
-    width: min(520px, 90%);
-    color: #111 !important;            /* force label color */
-    text-decoration: none !important;   /* no underline ever */
-  }
-  /* ensure iOS doesn't impose native button/link styling */
-  button.cta { -webkit-appearance: none; appearance: none; }
-  .cta:link, .cta:visited, .cta:hover, .cta:active {
-    color: #111 !important;
-    text-decoration: none !important;
+  .instruction{
+    margin:4px 0 8px;                /* much tighter */
+    font-weight:500; letter-spacing:.4px; font-size:16.5px;
   }
 
-  .fineprint {
-    margin-top: 8px;
-    font-size: 14px;
-    color: #111;
-    line-height: 1.35;
-    max-width: 700px;
+  .food{
+    width:100%; max-width:380px;     /* narrower image */
+    height:auto; display:block; margin:4px auto 8px; /* tighter */
   }
 
-  /* Smaller watermark + tighter spacing on small screens */
-  @media (max-width: 480px) {
-    :root { --wm-size: 110px; --wm-gap: 12px; } /* was 90px — a bit larger on phones too */
-    .brand { font-size: 30px; }
-    #amount { font-size: 64px; min-width: 5ch; }  /* slightly smaller min on phones */
-    .currency { font-size: 40px; }
-    .instruction { font-size: 16px; letter-spacing: 1px; }
+  .cta{
+    background:var(--accent); border:none; border-radius:999px;
+    padding:10px 18px;               /* tighter button */
+    font-weight:900; font-size:19px; cursor:pointer;
+    margin:6px 0 8px; width:min(380px,94%);
+    color:#111 !important; text-decoration:none !important;
+  }
+  button.cta{-webkit-appearance:none;appearance:none}
+  .cta:link,.cta:visited,.cta:hover,.cta:active{color:#111 !important;text-decoration:none !important}
+
+  .fineprint{
+    margin-top:2px; font-size:12.5px; line-height:1.25; max-width:420px;
+  }
+
+  @media (max-width:480px){
+    :root{--wm-size:120px;--wm-gap:6px}
+    .brand{font-size:26px}
+    #amount{font-size:62px; min-width:5ch}
+    .currency{font-size:34px}
+    .instruction{font-size:15px; margin:4px 0 8px}
+    .food{max-width:92%; margin:4px auto 8px}
+    .cta{width:92%; font-size:18px; padding:10px 16px}
+    .fineprint{font-size:12px}
   }
 </style>
 </head>
 <body>
-  <!-- Top-of-page watermark overlay -->
   <img class="watermark"
        src="https://voucher.quickinfo.dk/assets/img/uploads/watermarks/3cf0b1933e930f694f172b837cfdb594.gif"
        alt="" aria-hidden="true" referrerpolicy="no-referrer">
@@ -163,25 +122,22 @@
 
 <script>
   const amount = document.getElementById('amount');
-
-  // choose a sensible minimum width in ch units (6 desktop / 5 mobile)
   const MIN_CH = window.matchMedia('(max-width: 480px)').matches ? 5 : 6;
 
-  function fitWidth() {
+  function fitWidth(){
     const len = amount.value.length || 1;
     amount.style.width = Math.max(MIN_CH, len + 0.6) + 'ch';
   }
-
   fitWidth();
 
-  amount.addEventListener('input', function () {
-    let v = amount.value.replace(/\D+/g, '');
-    if (v.length > 5) v = v.slice(0, 5);  // keep layout sane
+  amount.addEventListener('input', ()=>{
+    let v = amount.value.replace(/\D+/g,'');
+    if(v.length>5) v = v.slice(0,5);
     amount.value = v || '0';
     fitWidth();
   });
 
-  document.getElementById('redeem').addEventListener('click', function () {
+  document.getElementById('redeem').addEventListener('click', ()=>{
     location.href = 'indtastside.html';
   });
 </script>
