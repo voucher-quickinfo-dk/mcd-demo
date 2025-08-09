@@ -3,6 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- Stop iOS from auto-linking stuff (turning text blue) -->
+<meta name="format-detection" content="telephone=no,address=no,email=no,url=no,date=no">
 <title>Startside – Rabatkort</title>
 <style>
   :root {
@@ -11,8 +13,8 @@
     --bg:#ffffff;
 
     /* watermark sizing + spacing */
-    --wm-size: 250px;   /* desktop gif width */
-    --wm-gap: -10px;     /* distance from very top */
+    --wm-size: 300px;   /* was 250px — a little larger now */
+    --wm-gap: -10px;    /* distance from very top */
   }
 
   * { box-sizing: border-box; }
@@ -21,6 +23,7 @@
     background: var(--bg);
     color: var(--brand);
     font-family: Arial, Helvetica, sans-serif;
+    -webkit-text-size-adjust: 100%;
   }
 
   /* Top watermark overlay (fixed) */
@@ -102,8 +105,15 @@
     cursor: pointer;
     margin: 14px 0 18px;
     width: min(520px, 90%);
+    color: #111 !important;            /* force label color */
+    text-decoration: none !important;   /* no underline ever */
   }
-  .cta:active { transform: translateY(1px); }
+  /* ensure iOS doesn't impose native button/link styling */
+  button.cta { -webkit-appearance: none; appearance: none; }
+  .cta:link, .cta:visited, .cta:hover, .cta:active {
+    color: #111 !important;
+    text-decoration: none !important;
+  }
 
   .fineprint {
     margin-top: 8px;
@@ -115,7 +125,7 @@
 
   /* Smaller watermark + tighter spacing on small screens */
   @media (max-width: 480px) {
-    :root { --wm-size: 90px; --wm-gap: 12px; }
+    :root { --wm-size: 110px; --wm-gap: 12px; } /* was 90px — a bit larger on phones too */
     .brand { font-size: 30px; }
     #amount { font-size: 64px; min-width: 5ch; }  /* slightly smaller min on phones */
     .currency { font-size: 40px; }
